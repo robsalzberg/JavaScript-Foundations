@@ -72,27 +72,54 @@ For example,
 mortgageCalculator(2000000, 0.05, 30); <-- should return 1,073.64
 */
 
-function mortgageCalculator(principal,interestRate, years, name) {
+// function mortgageCalculator(principal,interestRate, years, name) {
 
-  let monthlyInterestRate = interestRate / 12;
-  let periods = years * 12;
+//   let monthlyInterestRate = interestRate / 12;
+//   let periods = years * 12;
   
-  numerator =
-    principal *
-    (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods));
-  denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+//   numerator =
+//     principal *
+//     (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods));
+//   denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-  monthlyPayment = Math.round((numerator / denominator) * 100) / 100;
-  return `${name}, your monthly payment is ${monthlyPayment}`;
-}
+//   monthlyPayment = Math.round((numerator / denominator) * 100) / 100;
+//   return `${name}, your monthly payment is ${monthlyPayment}`;
+// }
 
-console.log(mortgageCalculator(200000,0.05,30,'Rob'));
+// console.log(mortgageCalculator(200000,0.05,30,'Rob'));
 
 // 🏡 Task 5: Conditionals
 /* Add another paramter to your function called credit score. This parameter will be a number between 0 and 800 (a credit score).
-
 Then, add control flow within your function such that IF creditScore is above 740, interest rate drops by 0.5%, if credit score is below 660, interest rate increases by 0.5% and if credit score is anywhere between 660 and 740 interest rate doesn't change.
-*/
+*/ 
+
+function mortgageCalculator(principal,interestRate, years, name, creditScore) {
+    if (creditScore > 740) {
+        interestRate = interestRate - 0.05;
+    } else if (creditScore < 660) {
+        interestRate = interestRate + 0.05;
+    } else {
+        interestRate;
+    }
+
+    let monthlyInterestRate = interestRate / 12;
+    let periods = years * 12;
+    
+    numerator =
+      principal *
+      (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods));
+    denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+
+    monthlyPayment = Math.round((numerator / denominator) * 100) / 100;
+
+    if (isNaN(monthlyPayment)) {
+        monthlyPayment = Math.round((principal / (years * 12)) * 100) / 100;
+    } 
+
+    return `${name}, your monthly payment is ${monthlyPayment}`;
+  }
+  
+  console.log(mortgageCalculator(200000,0.05,30,'Rob', 659));
 
 // 🏡 Task 6: Loops
 /* Write a new function called variableInterestRate. This function should be the same as mortgageCalculator, except it should console.log the monthly payment for 10 different interest rates at 0.5% increments plus or minus 2% from the inputted interest rate. Complete these calculations using a for loop.
