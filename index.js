@@ -28,8 +28,14 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 When your math is correct, monthlyRate will equal 1073.64
 */
 
+// M = P [ I ( 1 + I )^N ] / [ ( 1 + I )^N – 1 ]
 
+numerator = principal * (monthlyInterestRate * (Math.pow((1 + monthlyInterestRate),periods)));
+denominator = Math.pow((1 + monthlyInterestRate), periods) - 1;
 
+monthlyPayment = Math.round((numerator / denominator) * 100) / 100;
+
+console.log(monthlyPayment);
 
 // 🏡 Task 3: Function
 /* Create a function called `mortgageCalculator` that combines all of the steps from task 1 and 2 and returns a sentence "{Name}, your monthly rate is ${monthlyRate}"
