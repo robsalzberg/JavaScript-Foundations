@@ -137,31 +137,31 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
 
-function variableInterestRate(principal, interestRate, years, name) {
-  interestRate = interestRate - 0.025;
+// function variableInterestRate(principal, interestRate, years, name) {
+//   interestRate = interestRate - 0.025;
 
-  for (let i = 0; i < 10; i++) {
-    interestRate = Math.round((interestRate += 0.005) * 1000) / 1000;
-    let monthlyInterestRate = interestRate / 12;
-    let periods = years * 12;
+//   for (let i = 0; i < 10; i++) {
+//     interestRate = Math.round((interestRate += 0.005) * 1000) / 1000;
+//     let monthlyInterestRate = interestRate / 12;
+//     let periods = years * 12;
 
-    numerator =
-      principal *
-      (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods));
-    denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+//     numerator =
+//       principal *
+//       (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods));
+//     denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-    monthlyPayment = Math.round(numerator / denominator);
+//     monthlyPayment = Math.round(numerator / denominator);
 
-    if (isNaN(monthlyPayment)) {
-      monthlyPayment = Math.round((principal / (years * 12)) * 100) / 100;
-    }
-    console.log(
-      `${name}, with an interest rate of ${interestRate}, your monthly payment is $${monthlyPayment}`
-    );
-  }
-}
+//     if (isNaN(monthlyPayment)) {
+//       monthlyPayment = Math.round((principal / (years * 12)) * 100) / 100;
+//     }
+//     console.log(
+//       `${name}, with an interest rate of ${interestRate}, your monthly payment is $${monthlyPayment}`
+//     );
+//   }
+// }
 
-variableInterestRate(200000, 0.04, 30, "Rob");
+// variableInterestRate(200000, 0.04, 30, "Rob");
 
 // 🌟🌟🌟 STRETCH 🌟🌟🌟//
 
@@ -171,6 +171,24 @@ variableInterestRate(200000, 0.04, 30, "Rob");
 
 /* 🏡 Build a calculator function that accepts `monthly payment` and `interest rate` and returns the maximum loan that a person could afford */
 
+function maximumLoanAmount(monthlyPayment, interestRate) {
+let years = 30;
+let periods = years * 12;
+monthlyInterestRate = interestRate / 12;
+monthlyRate = monthlyInterestRate / 100
+
+//let a = (monthlyPayment/monthlyRate);
+//let b = (1 - Math.pow((1 + monthlyRate), -periods));
+let loan = (monthlyPayment/monthlyRate)*(1 - Math.pow((1 + monthlyRate), -periods));
+
+//return a;
+//return b;
+return loan;
+}
+
+console.log(maximumLoanAmount(950,3));
+
 /* 🏡 Explore using `window.prompt()` to allow a user to input parameters in the browser */
 
 /* 🏡  Refactor your `variableInterestRate()` function to accept an array of interest rates (make sure to copy and paste as to not lose your work!) */
+
